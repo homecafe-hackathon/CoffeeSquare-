@@ -9,6 +9,6 @@
     <string name="user_nickname">nickname</string>
     <string name="plus">피드추가</string>
     <string name="btn_test">사진 업로드</string>
-
-
+    <string name="kakao_app_key">3d77fb07d14610ef1b74ef5680caf6f7</string>
+    <string name="kakao_scheme">kakao3d77fb07d14610ef1b74ef5680caf6f7</string>
 </resources>

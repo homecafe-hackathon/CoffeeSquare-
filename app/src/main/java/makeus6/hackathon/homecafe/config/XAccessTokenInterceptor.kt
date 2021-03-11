@@ -1,4 +1,4 @@
-package com.softsquared.template.kotlin.config
+package makeus6.hackathon.homecafe.config
 
 import makeus6.hackathon.homecafe.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import makeus6.hackathon.homecafe.config.ApplicationClass.Companion.sSharedPreferences

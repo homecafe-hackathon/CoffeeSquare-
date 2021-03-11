@@ -1,4 +1,4 @@
-package com.softsquared.template.kotlin.util
+package makeus6.hackathon.homecafe.util
 
 import android.app.Dialog
 import android.content.Context
