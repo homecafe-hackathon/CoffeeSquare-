@@ -1,4 +1,4 @@
-package com.softsquared.template.kotlin.config
+package makeus6.hackathon.homecafe.config
 
 import com.google.gson.annotations.SerializedName
 

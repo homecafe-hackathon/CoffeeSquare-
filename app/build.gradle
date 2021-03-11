@@ -19,6 +19,7 @@ android {
     }
 
     buildFeatures {
+        dataBinding = true
         viewBinding = true
     }
 
@@ -63,13 +64,13 @@ dependencies {
     // https://github.com/ybq/Android-SpinKit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
-    //kakao
-    implementation "com.kakao.sdk:v2-user:2.0.1"
-
     //firebase
     implementation platform('com.google.firebase:firebase-bom:26.6.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'com.google.firebase:firebase-storage:19.2.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    // 카카오 로그인
+    implementation "com.kakao.sdk:v2-user:2.4.1"
 }

@@ -8,7 +8,7 @@
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
-        android:title="@string/main_btm_nav_home_title" />
+        android:title="@string/main_btm_nav_home_title"/>
 
     <item
         android:id="@+id/menu_main_btm_nav_plus"

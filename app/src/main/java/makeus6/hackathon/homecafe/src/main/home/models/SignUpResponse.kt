@@ -1,7 +1,7 @@
 package com.softsquared.template.kotlin.src.main.home.models
 
 import com.google.gson.annotations.SerializedName
-import com.softsquared.template.kotlin.config.BaseResponse
+import makeus6.hackathon.homecafe.config.BaseResponse
 
 data class SignUpResponse(
         // 베이스 리스폰스를 상속 받았으므로, 아래 내용은 포함이 되었습니다.

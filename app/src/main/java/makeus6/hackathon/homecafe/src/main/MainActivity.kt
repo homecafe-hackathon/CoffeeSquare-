@@ -8,10 +8,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kakao.sdk.common.util.Utility
 import makeus6.hackathon.homecafe.src.main.home.HomeFragment
 
+import makeus6.hackathon.homecafe.src.main.myPage.MyPageFragment
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityMainBinding
 import makeus6.hackathon.homecafe.src.main.feed.AddPhotoActivity
+import makeus6.hackathon.homecafe.src.main.home.HomeFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
@@ -29,15 +31,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }
-//                    R.id.menu_main_btm_nav_my_page -> {
-//                        supportFragmentManager.beginTransaction()
-//                            .replace(R.id.main_frm, MyPageFragment())
-//                            .commitAllowingStateLoss()
-//                        return@OnNavigationItemSelectedListener true
-//                    }
-
-                    R.id.menu_main_btm_nav_plus->{
-                        startActivity(Intent(this,AddPhotoActivity::class.java))
+                    R.id.menu_main_btm_nav_my_page -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, MyPageFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
                     }
                 }
                 false
