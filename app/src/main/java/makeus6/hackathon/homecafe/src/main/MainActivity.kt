@@ -1,12 +1,12 @@
-package com.softsquared.template.kotlin.src.main
+package makeus6.hackathon.homecafe.src.main
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.softsquared.template.kotlin.R
-import com.softsquared.template.kotlin.config.BaseActivity
-import com.softsquared.template.kotlin.databinding.ActivityMainBinding
 import com.softsquared.template.kotlin.src.main.home.HomeFragment
 import com.softsquared.template.kotlin.src.main.myPage.MyPageFragment
+import makeus6.hackathon.homecafe.R
+import makeus6.hackathon.homecafe.config.BaseActivity
+import makeus6.hackathon.homecafe.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
