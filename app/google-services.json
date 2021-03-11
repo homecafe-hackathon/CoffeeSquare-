@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "645485897491",
+    "project_id": "homecafe-fdbe1",
+    "storage_bucket": "homecafe-fdbe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645485897491:android:ba93ecf7920090814fdce6",
+        "android_client_info": {
+          "package_name": "makeus6.hackathon.homecafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645485897491-tfcrpe20l4a951moc0611n74v48jkom4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFFOvgOfHzVq2XL2qg7GS_dgx78X_NYvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645485897491-tfcrpe20l4a951moc0611n74v48jkom4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

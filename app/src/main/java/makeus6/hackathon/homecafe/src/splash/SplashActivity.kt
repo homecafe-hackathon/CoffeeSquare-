@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.softsquared.template.kotlin.config.BaseActivity
-import com.softsquared.template.kotlin.databinding.ActivitySplashBinding
+import makeus6.hackathon.homecafe.config.BaseActivity
+import makeus6.hackathon.homecafe.databinding.ActivitySplashBinding
 import makeus6.hackathon.homecafe.src.main.MainActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
