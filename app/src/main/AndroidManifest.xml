@@ -4,9 +4,9 @@
     package="makeus6.hackathon.homecafe">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!--갤러리 권한-->
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 갤러리 권한 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".config.ApplicationClass"
@@ -17,9 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".src.login.LoginActivity">
-        </activity>
-        <activity android:name=".src.main.MainActivity">
+        <activity android:name=".src.login.SetProfileActivity"></activity>
+        <activity
+            android:name=".src.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +32,9 @@
                     android:scheme="kakao3d77fb07d14610ef1b74ef5680caf6f7" />
             </intent-filter>
         </activity>
-        <activity android:name=".src.main.feed.AddPhotoActivity"/>
+        <activity android:name=".src.main.MainActivity">
+        </activity>
+        <activity android:name=".src.main.feed.AddPhotoActivity" />
     </application>
+
 </manifest>
