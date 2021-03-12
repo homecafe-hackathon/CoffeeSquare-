@@ -83,6 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     override fun onLoginFailure(message: String) {
