@@ -40,7 +40,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".src.main.MainActivity" />
-
+        <activity android:name=".src.main.home.detail.DetailActivity"/>
         <activity android:name=".src.main.feed.AddPhotoActivity" />
     </application>
 

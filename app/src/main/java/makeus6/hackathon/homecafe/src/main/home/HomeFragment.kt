@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
         super.onStart()
 
         showLoadingDialog(requireContext())
-        HomeService(this).getFeed(0,5)
+        HomeService(this).getFeed(0,9)
     }
 
     override fun onGetFeedSuccess(response: HomeResponse) {
