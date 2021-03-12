@@ -35,13 +35,21 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         storage = FirebaseStorage.getInstance()
 
 
-        binding.uploadBtn.setOnClickListener {  loadImage()
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)}
+        binding.uploadBtn.setOnClickListener {
+            binding.uploadBtn.visibility= View.GONE
+            binding.camaraView.visibility=View.GONE
+            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            loadImage()
+
+        }
 
         binding.selectList.layoutManager=GridLayoutManager(this,3)
-        binding.plusBtn.setOnClickListener { loadImage()
-
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes) }
+        binding.plusBtn.setOnClickListener {
+            binding.uploadBtn.visibility= View.GONE
+            binding.camaraView.visibility=View.GONE
+            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            loadImage()
+            }
 
 
         binding.feedBtn.setOnClickListener {
@@ -99,7 +107,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
 
                                 selectArr.add(dataUri.toString())
                                 binding.photoCount.setText("${count}/6")
-                                binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+
                             }
                         }
                     }
@@ -134,8 +142,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                     val check_uri: Uri = Uri.parse(check)
                     Log.d("확인", "문자열된값:" + check)
                     Log.d("확인", "Uri로 다시 변환된값:" + check_uri)
-                    binding.uploadBtn.visibility= View.GONE
-                    binding.camaraView.visibility=View.GONE
+
                     binding.selectList.adapter = selectRecycler(this, uriArr)
                 }
             }

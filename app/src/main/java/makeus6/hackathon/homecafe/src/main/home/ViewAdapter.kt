@@ -1,6 +1,7 @@
 package makeus6.hackathon.homecafe.src.main.home
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import makeus6.hackathon.homecafe.R
+import makeus6.hackathon.homecafe.src.main.home.detail.DetailActivity
 
 class ViewAdapter(private val context: Context, private val items:List<String>):
         RecyclerView.Adapter<ViewAdapter.ViewHolder>() {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewAdapter.ViewHolder
             = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.viewpager_img,parent,false))
 
@@ -37,6 +41,10 @@ class ViewAdapter(private val context: Context, private val items:List<String>):
         holder.imageUrl.scaleType=ImageView.ScaleType.CENTER_CROP
         Glide.with(context).load(Url).into(holder.imageUrl)
 
+
+//        holder.imageUrl.setOnClickListener {
+//
+//        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

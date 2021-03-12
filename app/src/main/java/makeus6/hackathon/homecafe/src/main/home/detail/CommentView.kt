@@ -1,0 +1,11 @@
+package makeus6.hackathon.homecafe.src.main.home.detail
+
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentResponse
+
+interface CommentView {
+
+
+    fun onGetCommentSuccess(response: CommentResponse)
+
+    fun onGetCommentFailure(message: String)
+}

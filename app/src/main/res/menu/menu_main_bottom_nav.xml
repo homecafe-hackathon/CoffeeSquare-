@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_main_btm_nav_home"
-        android:icon="@drawable/invalid_home"
+        android:icon="@drawable/home_main"
         app:showAsAction="always"
         android:enabled="true"
         android:checkable="true"
@@ -20,9 +20,10 @@
 
     <item
         android:id="@+id/menu_main_btm_nav_my_page"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/profile_main"
         app:showAsAction="always"
         android:enabled="true"
+        android:checkable="true"
         android:title="@string/main_btm_nav_my_page_title" />
 
 </menu>
