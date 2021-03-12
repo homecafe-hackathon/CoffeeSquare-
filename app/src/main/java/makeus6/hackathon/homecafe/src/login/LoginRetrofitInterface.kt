@@ -1,7 +1,8 @@
 package makeus6.hackathon.homecafe.src.login
 
 import makeus6.hackathon.homecafe.src.login.models.LoginResponse
-import makeus6.hackathon.homecafe.src.login.models.PostSignUpRequest
+import makeus6.hackathon.homecafe.src.login.models.PostSetProfileRequest
+import makeus6.hackathon.homecafe.src.login.models.SetProfileResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,5 +13,5 @@ interface LoginRetrofitInterface {
 
 //   회원가입 요청 API
     @POST("/api/v1/member")
-    fun postSignUp(@Body params:PostSignUpRequest)
+    fun postSignUp(@Body params:PostSetProfileRequest) : Call<SetProfileResponse>
 }

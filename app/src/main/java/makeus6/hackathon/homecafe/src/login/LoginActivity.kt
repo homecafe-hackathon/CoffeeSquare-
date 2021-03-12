@@ -10,10 +10,15 @@ import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityLoginBinding
 import makeus6.hackathon.homecafe.src.login.models.LoginResponse
+import makeus6.hackathon.homecafe.src.login.models.SetProfileResponse
+import makeus6.hackathon.homecafe.src.main.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
-    private val editor: SharedPreferences.Editor = ApplicationClass.sf.edit()
     lateinit var accessToken:String
+    lateinit var email:String
+    lateinit var name:String
+    var profileUrl:String?=null //프로필 사진은 없을수도있음
+    private val editor: SharedPreferences.Editor = ApplicationClass.sf.edit()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +40,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             if (error != null) {
                 Log.e("kakaologin", "사용자 정보 요청 실패", error)
             } else if (user != null) {
+                email = user.kakaoAccount?.email!!
+                name = user.kakaoAccount?.profile?.nickname!!
+                profileUrl = user.kakaoAccount?.profile?.profileImageUrl
+
                 Log.i(
                     "kakaologin", "사용자 정보 요청 성공" +
                             "\n회원번호: ${user.id}" +
                             "\n이메일: ${user.kakaoAccount?.email}" +
                             "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                            "\n프로필사진: ${user.kakaoAccount?.profile?.profileImageUrl}"
                 )
             }
         }
@@ -57,17 +66,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
-//       회원가입일때 프로필 등록 화면으로 넘어가도록
+//       회원가입일때 프로필 등록 화면으로 넘어가도록 -> 프로필 등록시 토큰 헤더에 등록
         if (response.data.type=="SIGN_UP"){
-            //    토큰값 넣기(임시! 원래는 회원가입이 완료되면 그때 전달해야함)
-            editor.putString(ApplicationClass.Authorization, accessToken)
+            val intent = Intent(this, SetProfileActivity::class.java)
+
+            intent.putExtra("email", email)
+            intent.putExtra("name", name)
+            intent.putExtra("profileUrl", profileUrl)
+
+            startActivity(intent)
+        } else {
+//          토큰 등록
+            editor.putString("Authorization", "Bearer "+response.data.token)
             editor.apply()
 
-            startActivity(Intent(this, SetProfileActivity::class.java))
-        } else {
-        //    토큰값 넣기
-            editor.putString(ApplicationClass.Authorization, accessToken)
-            editor.apply()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -75,5 +89,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun onLoginFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
+    }
+
+    override fun onSetProfileSuccess(response: SetProfileResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onSetProfileFailure(message: String) {
+        TODO("Not yet implemented")
     }
 }
