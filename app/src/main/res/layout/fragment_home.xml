@@ -7,22 +7,34 @@
     tools:context=".src.main.home.HomeFragment">
 
 
-    <TextView
+    <ImageView
         android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:src="@drawable/main_logo"
+        android:layout_marginTop="12sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="20sp"/>
 
+    <ImageView
+        android:layout_marginTop="11sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/banner"
+        android:id="@+id/banner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="25sp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintLeft_toLeftOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/app_name"/>
+       app:layout_constraintTop_toBottomOf="@id/banner"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

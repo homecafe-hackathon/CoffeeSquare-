@@ -25,4 +25,6 @@
         android:background="@drawable/page_box"
         android:textColor="@color/white"
         android:layout_margin="10sp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

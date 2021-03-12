@@ -146,7 +146,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
 
     override fun onAddPhotoSuccess(response: FeedResponse) {
         dismissLoadingDialog()
-        Log.d("확인",response.message)
+//        Log.d("확인",response.message)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

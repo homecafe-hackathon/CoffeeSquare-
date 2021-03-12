@@ -12,8 +12,8 @@ data class HomeResponse (
 )
 
 data class data(
-        @SerializedName("board") val board:MutableList<boardData>,
-        @SerializedName("creator")val creator:MutableList<creator>
+        @SerializedName("board") val board:boardData,
+        @SerializedName("creator")val creator:creator
 )
 
 data class boardData(
