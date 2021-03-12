@@ -1,15 +1,10 @@
 package com.softsquared.template.kotlin.src.main.home
 
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import makeus6.hackathon.homecafe.src.main.home.models.HomeResponse
 
 interface HomeFragmentView {
 
-    fun onGetUserSuccess(response: UserResponse)
+    fun onGetFeedSuccess(response: HomeResponse)
 
-    fun onGetUserFailure(message: String)
-
-    fun onPostSignUpSuccess(response: SignUpResponse)
-
-    fun onPostSignUpFailure(message: String)
+    fun onGetFeedFailure(message: String)
 }

@@ -22,6 +22,9 @@
             android:name=".src.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".src.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,8 +34,6 @@
                     android:host="oauth"
                     android:scheme="kakao3d77fb07d14610ef1b74ef5680caf6f7" />
             </intent-filter>
-        </activity>
-        <activity android:name=".src.main.MainActivity">
         </activity>
         <activity android:name=".src.main.feed.AddPhotoActivity" />
     </application>

@@ -10,6 +10,7 @@ import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityLoginBinding
 import makeus6.hackathon.homecafe.src.login.models.LoginResponse
+import makeus6.hackathon.homecafe.src.main.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
     private val editor: SharedPreferences.Editor = ApplicationClass.sf.edit()
@@ -24,7 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.e("kakaologin", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("kakaologin", "로그인 성공 ${token.accessToken}")
-                accessToken = "Bearer "+token.accessToken
+                //accessToken = "Bearer "+token.accessToken
                 showLoadingDialog(this)
                 LoginService(this).tryLogin(token.accessToken)
             }
@@ -62,8 +63,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             //    토큰값 넣기(임시! 원래는 회원가입이 완료되면 그때 전달해야함)
             editor.putString(ApplicationClass.Authorization, accessToken)
             editor.apply()
-
-            startActivity(Intent(this, SetProfileActivity::class.java))
+            startActivity(Intent(this,MainActivity::class.java))
+            //startActivity(Intent(this, SetProfileActivity::class.java))
         } else {
         //    토큰값 넣기
             editor.putString(ApplicationClass.Authorization, accessToken)

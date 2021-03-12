@@ -4,36 +4,27 @@ import makeus6.hackathon.homecafe.config.ApplicationClass
 import com.softsquared.template.kotlin.src.main.home.models.PostSignUpRequest
 import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
 import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import makeus6.hackathon.homecafe.src.main.feed.AddPhotoRetrofitInterface
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedRequest
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedResponse
+import makeus6.hackathon.homecafe.src.main.home.models.HomeResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class HomeService(val view: HomeFragmentView) {
 
-    fun tryGetUsers(){
-        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-        homeRetrofitInterface.getUsers().enqueue(object : Callback<UserResponse>{
-            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                view.onGetUserSuccess(response.body() as UserResponse)
+
+    fun getFeed(lastBoardId:Int,size:Int){
+        val HomeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        HomeRetrofitInterface.getFeed(lastBoardId,size).enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                view.onGetFeedSuccess(response.body() as HomeResponse)
             }
 
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                view.onGetUserFailure(t.message ?: "통신 오류")
-            }
-        })
-    }
-
-    fun tryPostSignUp(postSignUpRequest: PostSignUpRequest){
-        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-        homeRetrofitInterface.postSignUp(postSignUpRequest).enqueue(object : Callback<SignUpResponse>{
-            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                view.onPostSignUpSuccess(response.body() as SignUpResponse)
-            }
-
-            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                view.onPostSignUpFailure(t.message ?: "통신 오류")
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                view.onGetFeedFailure(t.message ?: "통신 오류")
             }
         })
     }
-
 }
