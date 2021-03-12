@@ -19,6 +19,7 @@
         android:background="@color/white"
         app:itemBackground="@color/white"
         app:labelVisibilityMode="unlabeled"
+        android:backgroundTint="@color/brown_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_bottom_nav" />
 

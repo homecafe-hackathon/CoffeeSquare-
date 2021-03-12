@@ -12,7 +12,7 @@ import makeus6.hackathon.homecafe.databinding.ActivityDetailBinding
 import makeus6.hackathon.homecafe.src.main.home.HomeAdapter
 import makeus6.hackathon.homecafe.src.main.home.HomeService
 import makeus6.hackathon.homecafe.src.main.home.ViewAdapter
-import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentResponse
+import makeus6.hackathon.homecafe.src.main.home.detail.models.*
 
 class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate),CommentView {
 
@@ -58,6 +58,15 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         showLoadingDialog(this)
         CommentService(this).getComment(boardIdx!!)
 
+        binding.commentUploadBtn.setOnClickListener {
+            val commentRequest=CommentRequest(
+                    boardId=boardIdx!!,
+                    content=binding.commentEdit.text.toString()
+            )
+
+            CommentService(this).postComment(commentRequest)
+            showLoadingDialog(this)
+        }
 
     }
 
@@ -66,6 +75,9 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         dismissLoadingDialog()
         Log.d("확인","성공:"+response.data.toString())
 
+        binding.commentCount.text="댓글"+response.data.board.commentsCount+"개"
+        binding.likeCount.text="좋아요"+response.data.board.likesCount+"개"
+
         binding.commentRecycler.adapter=CommentRecycler(this,response.data)
     }
 
@@ -73,6 +85,22 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         dismissLoadingDialog()
         Log.d("확인","실패"+message)
     }
+
+    override fun onPostCommentSuccess(response: CommentEditResponse) {
+        dismissLoadingDialog()
+        Log.d("확인","성공:"+response.data.toString())
+
+        showLoadingDialog(this)
+        CommentService(this).getComment(boardIdx!!)
+
+
+    }
+
+    override fun onPostCommentFailure(message: String) {
+        dismissLoadingDialog()
+        Log.d("확인","실패"+message)
+    }
+
 
 
 }
