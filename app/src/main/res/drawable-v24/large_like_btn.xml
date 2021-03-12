@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/like_btn_large" android:state_checked="true"/>
-    <item android:drawable="@drawable/like_btn" android:state_checked="false"/>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid
+        android:color="@color/light_brown"/>
+    <corners android:radius="7dp"/>
+</shape>

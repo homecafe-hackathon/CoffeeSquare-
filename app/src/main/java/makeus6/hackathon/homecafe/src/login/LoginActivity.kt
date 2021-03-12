@@ -14,7 +14,6 @@ import makeus6.hackathon.homecafe.src.login.models.SetProfileResponse
 import makeus6.hackathon.homecafe.src.main.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
-    lateinit var accessToken:String
     lateinit var email:String
     lateinit var name:String
     var profileUrl:String?=null //프로필 사진은 없을수도있음
@@ -29,7 +28,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.e("kakaologin", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("kakaologin", "로그인 성공 ${token.accessToken}")
-                accessToken = "Bearer "+token.accessToken
                 showLoadingDialog(this)
                 LoginService(this).tryLogin(token.accessToken)
             }
@@ -82,8 +80,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
-
     }
 
     override fun onLoginFailure(message: String) {

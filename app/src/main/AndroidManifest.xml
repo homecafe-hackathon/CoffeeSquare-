@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".src.main.mypage.MyPageEditProfileActivity"></activity>
         <activity android:name=".src.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,13 +29,12 @@
                     android:scheme="kakao3d77fb07d14610ef1b74ef5680caf6f7" />
             </intent-filter>
         </activity>
-        <activity android:name=".src.main.mypage.MyPageActivity"></activity>
+        <activity android:name=".src.main.mypage.MyPageActivity" />
         <activity android:name=".src.login.SetProfileActivity" />
         <activity
             android:name=".src.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".src.main.MainActivity" />
         <activity android:name=".src.main.feed.AddPhotoActivity" />
     </application>

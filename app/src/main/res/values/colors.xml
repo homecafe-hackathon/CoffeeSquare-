@@ -34,4 +34,8 @@
 
     <!-- splash -->
     <color name="splash_background">#e3ded5</color>
+
+    <!--text color-->
+    <color name="light_brown">#9b9079</color>
+
 </resources>
