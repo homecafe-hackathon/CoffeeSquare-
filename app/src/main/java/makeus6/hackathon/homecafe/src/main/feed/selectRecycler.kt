@@ -34,7 +34,6 @@ class selectRecycler(val context: Context,selectArr:MutableList<String>):Recycle
         }
         holder.selectImg.scaleType=ImageView.ScaleType.CENTER_CROP
         Glide.with(context).load(Url).into(holder.selectImg)
-
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
