@@ -39,8 +39,8 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         Log.d("확인", "이미지 불러오는 중입니다.")
         val intent = Intent()
         intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.action = Intent.ACTION_GET_CONTENT
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
 
         startActivityForResult(Intent.createChooser(intent, "Load Picture"), Gallery)
 
@@ -51,12 +51,12 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Gallery) {
             if (resultCode == RESULT_OK) {
-                val count = data!!.clipData!!.itemCount
-
-                for (i in 0 until count) {
-                    val imageUri = data.clipData!!.getItemAt(i).uri
-                    uriArr.add(imageUri.toString())
-                }
+//                val count = data!!.clipData!!.itemCount
+//
+//                for (i in 0 until count) {
+//                    val imageUri = data.clipData!!.getItemAt(i).uri
+//                    uriArr.add(imageUri.toString())
+//                }
                 var dataUri = data?.data
                 photoUri = data?.data
                 try {
@@ -64,8 +64,8 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                     val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
                     Log.d("확인", "선택한 사진은" + bitmap)
                     Log.d("확인", dataUri.toString())
-
-                    binding.selectImg.setImageURI(data.clipData!!.getItemAt(0).uri)
+                    binding.selectImg.setImageBitmap(bitmap)
+                   // binding.selectImg.setImageURI(data.clipData!!.getItemAt(0).uri)
                 } catch (e: Exception) {
                     Log.d("확인", "이미지 업로드 오류" + e.toString())
                 }
