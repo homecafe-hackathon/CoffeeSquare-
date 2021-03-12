@@ -69,6 +69,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             editor.putString(ApplicationClass.Authorization, accessToken)
             editor.apply()
         }
+
     }
 
     override fun onLoginFailure(message: String) {
