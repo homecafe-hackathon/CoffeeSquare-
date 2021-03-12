@@ -3,15 +3,12 @@ package makeus6.hackathon.homecafe.src.main.feed
 import android.content.ClipData
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.storage.FirebaseStorage
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.BaseActivity
@@ -19,7 +16,6 @@ import makeus6.hackathon.homecafe.databinding.ActivityAddphotoBinding
 import makeus6.hackathon.homecafe.src.main.MainActivity
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedRequest
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedResponse
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -150,7 +146,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
 
     override fun onAddPhotoSuccess(response: FeedResponse) {
         dismissLoadingDialog()
-        Log.d("확인",response.message)
+//        Log.d("확인",response.message)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

@@ -1,11 +1,13 @@
 package makeus6.hackathon.homecafe.src.main.home
 
-import com.softsquared.template.kotlin.src.main.home.models.PostSignUpRequest
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import makeus6.hackathon.homecafe.src.main.home.models.HomeResponse
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface HomeRetrofitInterface {
+
+    @GET("/api/v1/board/list")
+    fun getFeed(@Query("lastBoardId")  lastBoardId:Int , @Query("size")  size:Int)  :Call<HomeResponse>
 
 }
