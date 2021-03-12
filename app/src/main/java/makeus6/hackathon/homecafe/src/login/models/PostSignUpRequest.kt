@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class PostSignUpRequest(
         @SerializedName("email") val email: String,
         @SerializedName("name") val name: String?,
-        @SerializedName("profileUrl") val profileUrl: String?
+        @SerializedName("profileUrl") val profileUrl: String? //프로필 사진 안넣었을때
 )

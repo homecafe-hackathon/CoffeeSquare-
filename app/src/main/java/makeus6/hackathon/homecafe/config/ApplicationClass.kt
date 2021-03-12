@@ -23,11 +23,12 @@ class ApplicationClass : Application() {
 
     // 코틀린의 전역변수 문법
     companion object {
-        // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
-        lateinit var sSharedPreferences: SharedPreferences
 
-        // JWT Token Header 키 값
-        val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
+        lateinit var sf: SharedPreferences
+
+        // Token Header 키 값
+        val Authorization = "Authorization"
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
@@ -37,8 +38,8 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
         //싱글톤 객체 2개
-        sSharedPreferences =
-            applicationContext.getSharedPreferences("SOFTSQUARED_TEMPLATE_APP", MODE_PRIVATE)
+        sf =
+            applicationContext.getSharedPreferences("homecafe", MODE_PRIVATE)
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
 
