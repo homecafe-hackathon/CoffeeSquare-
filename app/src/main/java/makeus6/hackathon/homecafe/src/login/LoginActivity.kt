@@ -55,6 +55,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             Log.d("hello", "안뇽")
             startActivity(Intent(this, SetProfileActivity::class.java))
         }
+
     }
 
     override fun onLoginFailure(message: String) {

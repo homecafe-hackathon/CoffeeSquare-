@@ -139,6 +139,7 @@
         android:layout_marginBottom="28sp"
         android:background="@drawable/upload_btn_background"
         android:text="@string/upload"
+        android:layout_marginTop="29sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.084"
         app:layout_constraintLeft_toLeftOf="parent"
