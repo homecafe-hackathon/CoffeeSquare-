@@ -11,4 +11,12 @@
     <string name="btn_test">사진 업로드</string>
     <string name="kakao_app_key">3d77fb07d14610ef1b74ef5680caf6f7</string>
     <string name="kakao_scheme">kakao3d77fb07d14610ef1b74ef5680caf6f7</string>
+    <string name="comment">댓글 17개</string>
+    <string name="like_count">좋아요 17개</string>
+    <string name="add_feed">새 글 등록</string>
+    <string name="photo_text">사진</string>
+    <string name="photo_count_text">2/6</string>
+    <string name="content">내용</string>
+    <string name="content_hint">나만의 홈 카페에 대한 내용을 입력해보세요 :)</string>
+    <string name="upload">등록하기</string>
 </resources>

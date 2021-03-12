@@ -28,4 +28,7 @@
     <color name="page">#323232</color>
     <color name="snackbar">#313131</color>
     <color name="grey">#F7F7F7</color>
+    <color name="brown_700">#7e7157</color>
+    <color name="gray_200">#f2efeb</color>
+    <color name="gray_000">#e0e0e0</color>
 </resources>

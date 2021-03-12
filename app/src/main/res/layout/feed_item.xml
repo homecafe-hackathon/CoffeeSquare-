@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <ImageView
         android:id="@+id/user_img"
         android:layout_width="30sp"
         android:layout_height="30sp"
-        android:layout_margin="10sp"
+        android:layout_marginTop="10sp"
         android:src="@drawable/no_img"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@id/feed_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -20,10 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10sp"
-        android:layout_marginTop="13sp"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/user_img"
         app:layout_constraintLeft_toRightOf="@id/user_img"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/user_img"
         tools:text="@string/user_nickname" />
 
     <ImageView
@@ -31,29 +31,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14sp"
-        android:layout_marginRight="10sp"
-        android:src="@drawable/vert"
+        android:layout_marginRight="33sp"
+        android:src="@drawable/more_btn"
+        app:layout_constraintBottom_toBottomOf="@id/user_nick"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/user_nick" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/feed_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginLeft="23sp"
         android:layout_marginTop="10sp"
+        android:layout_marginRight="23sp"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_img"/>
+        app:layout_constraintTop_toBottomOf="@id/user_img" />
 
     <ImageButton
         android:id="@+id/feed_like_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
         android:layout_marginTop="4sp"
         android:background="@android:color/transparent"
         android:src="@drawable/large_like_btn"
-        app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintStart_toStartOf="@id/feed_view"
+        app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+
+    <TextView
+        android:id="@+id/likeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4sp"
+        android:layout_marginRight="10sp"
+        android:text="@string/like_count"
+        android:textColor="@color/brown_700"
+        android:textSize="10sp"
+        app:layout_constraintRight_toLeftOf="@id/commentCount"
+        app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+    <TextView
+        android:id="@+id/commentCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4sp"
+        android:text="@string/comment"
+        android:textColor="@color/brown_700"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@id/feed_view"
         app:layout_constraintTop_toBottomOf="@id/feed_view" />
 
 
