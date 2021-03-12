@@ -52,6 +52,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun onLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
         if (response.data.type=="SIGN_UP"){
+            Log.d("hello", "안뇽")
             startActivity(Intent(this, SetProfileActivity::class.java))
         }
     }
