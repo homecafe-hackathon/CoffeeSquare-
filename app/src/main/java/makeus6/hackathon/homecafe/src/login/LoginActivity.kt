@@ -1,14 +1,15 @@
 package makeus6.hackathon.homecafe.src.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityLoginBinding
+import makeus6.hackathon.homecafe.src.login.models.LoginResponse
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,6 +19,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.e("kakaologin", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("kakaologin", "로그인 성공 ${token.accessToken}")
+                showLoadingDialog(this)
+                LoginService(this).tryLogin(token.accessToken)
             }
         }
 
@@ -44,5 +47,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
             }
         }
+    }
+
+    override fun onLoginSuccess(response: LoginResponse) {
+        dismissLoadingDialog()
+        if (response.data.type=="SIGN_UP"){
+            startActivity(Intent(this, SetProfileActivity::class.java))
+        }
+    }
+
+    override fun onLoginFailure(message: String) {
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 }
