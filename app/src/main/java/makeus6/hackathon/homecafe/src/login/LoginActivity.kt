@@ -1,15 +1,20 @@
 package makeus6.hackathon.homecafe.src.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityLoginBinding
 import makeus6.hackathon.homecafe.src.login.models.LoginResponse
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
+    private val editor: SharedPreferences.Editor = ApplicationClass.sf.edit()
+    lateinit var accessToken:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,6 +24,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 Log.e("kakaologin", "로그인 실패", error)
             } else if (token != null) {
                 Log.i("kakaologin", "로그인 성공 ${token.accessToken}")
+                accessToken = "Bearer "+token.accessToken
                 showLoadingDialog(this)
                 LoginService(this).tryLogin(token.accessToken)
             }
@@ -51,9 +57,17 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
+//       회원가입일때 프로필 등록 화면으로 넘어가도록
         if (response.data.type=="SIGN_UP"){
-            Log.d("hello", "안뇽")
+            //    토큰값 넣기(임시! 원래는 회원가입이 완료되면 그때 전달해야함)
+            editor.putString(ApplicationClass.Authorization, accessToken)
+            editor.apply()
+
             startActivity(Intent(this, SetProfileActivity::class.java))
+        } else {
+        //    토큰값 넣기
+            editor.putString(ApplicationClass.Authorization, accessToken)
+            editor.apply()
         }
 
     }
