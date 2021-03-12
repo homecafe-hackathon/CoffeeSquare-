@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import makeus6.hackathon.homecafe.R
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentDeleteResponse
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentUpdateResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.commentData
 import makeus6.hackathon.homecafe.src.main.home.detail.models.comments
 
 
-class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerView.Adapter<CommentRecycler.ViewHolder>(){
+class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerView.Adapter<CommentRecycler.ViewHolder>(),RecyclerCommentView{
 
     private var items:MutableList<comments> = selectArr.comments
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentRecycler.ViewHolder {
@@ -51,5 +53,21 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
         var userImg=itemView.findViewById<ImageView>(R.id.user_img)
         var userNick=itemView.findViewById<TextView>(R.id.user_nick)
         var comment=itemView.findViewById<TextView>(R.id.comment)
+    }
+
+    override fun onDeleteCommentSuccess(response: CommentDeleteResponse) {
+
+    }
+
+    override fun onDeleteCommentFailure(message: String) {
+
+    }
+
+    override fun onUpdateCommentSuccess(response: CommentUpdateResponse) {
+
+    }
+
+    override fun onUpdateCommentFailure(message: String) {
+
     }
 }
