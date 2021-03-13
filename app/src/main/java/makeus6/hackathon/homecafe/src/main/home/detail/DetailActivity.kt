@@ -43,7 +43,7 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
             url= intent.getStringArrayListExtra("url") as ArrayList<String>
             state=intent.getBooleanExtra("like_state",false)
         }
-        binding.feedName.text=nick+"의 카페"
+        binding.feedName.text=nick
         binding.commentRecycler.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         binding.userNick.text=nick
         binding.commentCount.text="댓글"+comment.toString()+"개"

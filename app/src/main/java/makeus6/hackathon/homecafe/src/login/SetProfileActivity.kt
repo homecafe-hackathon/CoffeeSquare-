@@ -3,6 +3,7 @@ package makeus6.hackathon.homecafe.src.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.config.BaseActivity
@@ -26,8 +27,9 @@ class SetProfileActivity : BaseActivity<ActivitySetProfileBinding>(ActivitySetPr
         binding.setprofileEdtName.setText(intent.getStringExtra("name")+"의 카페")
 
         binding.setprofileBtnRegister.setOnClickListener{
-            val postSetProfileRequest = PostSetProfileRequest(intent.getStringExtra("email")!!, intent.getStringExtra("name"),
-            intent.getStringExtra("profileUrl"))
+            Log.d("안녕", binding.setprofileEdtName.text.toString())
+            val postSetProfileRequest = PostSetProfileRequest(intent.getStringExtra("email")!!, binding.setprofileEdtName.text.toString(),
+                    intent.getStringExtra("profileUrl"))
 
             showLoadingDialog(this)
             LoginService(this).trySetProfile(postSetProfileRequest = postSetProfileRequest)
