@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".src.main.mypage.MyPageFragment">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mypage_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:lineSpacingExtra="2sp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="이름" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/mypage_img_profile"
+        android:layout_width="84sp"
+        android:layout_height="84sp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/setprofile_img_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/mypage_btn_setting"
+        android:layout_width="20sp"
+        android:layout_height="20sp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_mypage_setting_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mypage_img_profile">
+
+        <LinearLayout
+            android:id="@+id/mypage_layout_myhome"
+            android:layout_width="153sp"
+            android:layout_height="45sp"
+            android:layout_marginRight="22sp"
+            android:background="@drawable/latte_brown_button"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_marginLeft="15sp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_mypage_home_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="center"
+                android:text="나의 홈 카페"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="right"
+                android:text="("
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/mypage_tv_homecount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:text=")"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mypage_layout_heart"
+            android:layout_width="153sp"
+            android:layout_height="45sp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_marginLeft="15sp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_mypage_heart_icon" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="center"
+                android:text="내 좋아요"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="right"
+                android:text="("
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/mypage_tv_heartcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10sp"
+                android:layout_weight="1"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:text=")"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/mypage_gridview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

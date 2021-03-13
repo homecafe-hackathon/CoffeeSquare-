@@ -31,7 +31,12 @@
     <color name="brown_700">#7e7157</color>
     <color name="gray_200">#f2efeb</color>
     <color name="gray_000">#e0e0e0</color>
+    <color name="light_pink">#ffeade</color>
     <color name="gray_e">#dedede</color>
     <!-- splash -->
     <color name="splash_background">#e3ded5</color>
+
+    <!--text color-->
+    <color name="light_brown">#9b9079</color>
+
 </resources>

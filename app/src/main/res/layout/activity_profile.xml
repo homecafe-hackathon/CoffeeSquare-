@@ -7,7 +7,7 @@
     tools:context=".src.login.SetProfileActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/setprofile_btn_register"
+        android:id="@+id/editprofile_btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원가입"
