@@ -20,7 +20,6 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
     private val Gallery = 1
     var photoUri: Uri? = null
     private var profileUri:String? = null
-    lateinit var postPutProfileRequest: PostPutProfileRequest
     private val REQUEST_READ_EXTERMAL_STORAGE = 1000
     private var firebaseuri :Uri? = null
 
@@ -55,15 +54,20 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
 //       이름
         binding.editprofileEdtName.setText(name)
 
-//       프로필 변경 x 원래 profile
-        postPutProfileRequest =
-            PostPutProfileRequest(binding.editprofileEdtName.text.toString(), profileUri.toString())
-
         Log.d("확인", profileUrl.toString())
         //Log.d("확인", name.toString())
 
-        binding.setprofileBtnRegister.setOnClickListener {
+        binding.editprofileBtnRegister.setOnClickListener {
 //        프로필 수정
+            showLoadingDialog(this)
+
+            //       프로필 변경 x 원래 profile
+            val postPutProfileRequest =
+                    PostPutProfileRequest(binding.editprofileEdtName.text.toString(), profileUri.toString())
+
+            Log.d("hello", postPutProfileRequest.profileUrl)
+            Log.d("hello", postPutProfileRequest.name)
+
             MyPageService(this).tryPutProfile(postPutProfileRequest = postPutProfileRequest)
         }
     }

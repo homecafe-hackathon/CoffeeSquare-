@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/setprofile_btn_register"
+        app:layout_constraintBottom_toTopOf="@+id/editprofile_btn_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -81,7 +81,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/setprofile_btn_register"
+        android:id="@+id/editprofile_btn_register"
         android:layout_width="0dp"
         android:layout_height="60sp"
         android:layout_marginStart="16dp"

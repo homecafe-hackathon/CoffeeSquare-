@@ -15,13 +15,16 @@ import makeus6.hackathon.homecafe.src.main.mypage.models.*
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
     MyPageView {
     private lateinit var mGlideRequestManager:RequestManager //글라이드 매니저
-    var like_list = listOf<DataGetMyLike>() //좋아요는 나중에 불러오니깐
+    private var like_list = listOf<DataGetMyLike>() //좋아요는 나중에 불러오니깐
     lateinit var name:String
+    //lateinit var bind:ViewBinding
+
+//    var likesize =0
+//    var feedsize =0
 
     private var likeAdapter:MyLikeAdapter?=null
     private var feedAdapter:MyFeedAdapter?=null
-
-    private var profileUrl = ""
+    var profile_url:String?=null
     private val REQUEST_EDIT_PROFILE = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +38,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
 
         val bottomsheet = MyPageLoginBottomSheet()
 
-        showLoadingDialog(requireContext())
-        MyPageService(this).tryGetProfile() //프로필조회
-        MyPageService(this).tryGetMyFeed() //피드 조회
-        MyPageService(this).tryGetMyLike()
+//        프로필이미지
+        mGlideRequestManager
+                .load(profile_url)
+                .into(binding.mypageImgProfile)
 
 //        로그아웃
         binding.mypageBtnSetting.setOnClickListener {
@@ -49,7 +52,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
         binding.mypageImgProfile.setOnClickListener {
             val intent = Intent(requireContext(), MyPageEditProfileActivity::class.java)
             intent.putExtra("name", name)
-            intent.putExtra("profileUrl", profileUrl)
+            intent.putExtra("profileUrl", profile_url)
             startActivityForResult(intent, REQUEST_EDIT_PROFILE)
         }
 //
@@ -84,31 +87,43 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        showLoadingDialog(requireContext())
+        MyPageService(this).tryGetProfile() //프로필조회
+        MyPageService(this).tryGetMyFeed() //피드 조회
+        MyPageService(this).tryGetMyLike()
+    }
+
+//   프로필 수정 activity를 띄우고 결과값 받을때
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.d("확인", "result입니다")
         super.onActivityResult(requestCode, resultCode, data)
 
+        Log.d("확인", "result입니다")
+
         if (requestCode == REQUEST_EDIT_PROFILE) {
-            if (resultCode == RESULT_OK) {
-                showLoadingDialog(requireContext())
-                MyPageService(this).tryGetProfile()
-            }
+                if (resultCode == RESULT_OK) {
+                    fragmentManager
+                            ?.beginTransaction()
+                            ?.detach(this@MyPageFragment)
+                            ?.attach(this@MyPageFragment)
+                            ?.commit()
+                }
         }
     }
 
     override fun onGetProfileSuccess(response: MyPageResponse) {
         dismissLoadingDialog()
 
-        if (response.data.profileUrl!=null){
-            profileUrl = response.data.profileUrl
-
          // 프로필 이미지
             mGlideRequestManager
                     .load(response.data.profileUrl)
                     .into(binding.mypageImgProfile)
-        }
+
         binding.mypageTvName.text = response.data.name
         name = response.data.name
+        profile_url = response.data.profileUrl
     }
 
     override fun onGetProfileFailure(message: String) {
