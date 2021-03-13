@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
 import makeus6.hackathon.homecafe.src.main.mypage.models.DataGetMyFeed
+import makeus6.hackathon.homecafe.src.main.mypage.models.DataGetMyLike
 import org.jetbrains.anko.padding
 
-class MyFeedAdapter(val context: Context, uriArr: List<DataGetMyFeed>) : BaseAdapter(){
-    private var items = listOf<DataGetMyFeed>()
+class MyLikeAdapter(val context: Context, uriArr: List<DataGetMyLike>) : BaseAdapter(){
+    private var items = listOf<DataGetMyLike>()
 
     init {
         this.items = uriArr

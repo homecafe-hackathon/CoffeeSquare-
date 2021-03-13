@@ -10,39 +10,62 @@ import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityMyPageEditProfileBinding
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyFeedResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyLikeResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyPageEditResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyPageResponse
+import makeus6.hackathon.homecafe.src.main.mypage.models.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>(ActivityMyPageEditProfileBinding::inflate), MyPageView {
     var storage: FirebaseStorage? = null
-    val Gallery = 1
-    private var selectUri: Uri? = null
+    private val Gallery = 1
     var photoUri: Uri? = null
+    private var profileUri:String? = null
+    lateinit var postPutProfileRequest: PostPutProfileRequest
     private val REQUEST_READ_EXTERMAL_STORAGE = 1000
-    val uriArr = ArrayList<String>()
-    val selectArr = ArrayList<String>()
+    private var firebaseuri :Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val profileUrl = intent.getStringExtra("profileUrl")
         val name = intent.getStringExtra("name")
 
-        // 프로필 이미지
-        Glide.with(this)
-            .load(profileUrl)
-            .into(binding.editprofileImgProfile)
+        Log.d("확인", profileUrl.toString())
+        Log.d("확인", name.toString())
+
+//        이미 프로필 사진이 존재하면,
+        if (profileUrl != null) {
+            profileUri = profileUrl
+
+            // 프로필 이미지
+            Glide.with(this)
+                    .load(profileUrl)
+                    .into(binding.editprofileImgProfile)
+        }
+//        프로필 사진이 존재하지 않았다면
+        else{
+            profileUri = null
+        }
+
+        storage = FirebaseStorage.getInstance()
+
+        binding.editprofileImgProfile.setOnClickListener {
+            loadImage()
+        }
 
 //       이름
         binding.editprofileEdtName.setText(name)
 
+//       프로필 변경 x 원래 profile
+        postPutProfileRequest =
+            PostPutProfileRequest(binding.editprofileEdtName.text.toString(), profileUri.toString())
+
+        Log.d("확인", profileUrl.toString())
+        //Log.d("확인", name.toString())
+
+        binding.setprofileBtnRegister.setOnClickListener {
 //        프로필 수정
-//        val postPutProfileRequest = PostPutProfileRequest(binding.editprofileEdtName.text.toString(), binding.editprofileImgProfile.)
-//        MyPageService(this).tryPutProfile(postPutProfileRequest = )
+            MyPageService(this).tryPutProfile(postPutProfileRequest = postPutProfileRequest)
+        }
     }
 
     //   갤러리 띄우기
@@ -59,6 +82,7 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.d("확인","result입니다")
         super.onActivityResult(requestCode, resultCode, data)
+
         if(requestCode==Gallery){
             if(resultCode== RESULT_OK){
                 var dataUri=data?.data
@@ -67,9 +91,8 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
                     Log.d("확인","비트맵 변환전"+photoUri)
                     val bitmap: Bitmap =MediaStore.Images.Media.getBitmap(this.contentResolver,dataUri)
                     Log.d("확인","선택한 사진은"+bitmap)
-                    Log.d("확인",dataUri.toString())
+                    Log.d("확인", dataUri.toString())
 
-                    binding.editprofileImgProfile.setImageBitmap(bitmap)
                 }catch (e:Exception){
                     Log.d("확인","이미지 업로드 오류"+e.toString())
                 }
@@ -83,7 +106,6 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
 
     // 파이어베이스 업로드
     private fun contentUpload() {
-        showLoadingDialog(this)
 
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFile = "Image_" + timestamp + "_.jpg"
@@ -94,19 +116,21 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
         storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
             Log.d("photo", "파이어베이스 업로드완료")
             storageRef.downloadUrl.addOnSuccessListener { uri ->
-                Log.d("확인", uri.toString())
-                Log.d("확인", uri.toString())
-                val check: String = uri.toString()
-                val check_uri: Uri = Uri.parse(check)
-                Log.d("확인", "문자열된값:" + check)
-                Log.d("확인", "Uri로 다시 변환된값:" + check_uri)
+                firebaseuri = uri
+                profileUri = uri.toString()
 
                 dismissLoadingDialog()
+
+                // 프로필 이미지
+                Glide.with(this)
+                        .load(uri)
+                        .into(binding.editprofileImgProfile)
             }
         }
     }
 
     override fun onGetProfileSuccess(response: MyPageResponse) {
+        TODO("Not yet implemented")
 //        dismissLoadingDialog()
 //        // 프로필 이미지
 //        Glide.with(this)
@@ -124,11 +148,15 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
     }
 
     override fun onPutProfileSuccess(response: MyPageEditResponse) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        setResult(RESULT_OK)
+//        수정완료하고 종료!
+        finish()
     }
 
     override fun onPutProfileFailure(message: String) {
-        TODO("Not yet implemented")
+        dismissLoadingDialog()
+        showCustomToast("오류 : $message")
     }
 
     override fun onGetMyFeedSuccess(response: MyFeedResponse) {

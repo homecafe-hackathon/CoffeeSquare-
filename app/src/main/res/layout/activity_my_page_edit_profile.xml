@@ -45,7 +45,7 @@
             android:layout_width="110sp"
             android:layout_height="110sp"
             android:layout_gravity="center"
-            android:src="@drawable/setprofile_img_icon"
+            android:background="@drawable/setprofile_img_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,8 +55,8 @@
             android:id="@+id/imageView4"
             android:layout_width="27sp"
             android:layout_height="27sp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/editprofile_img_profile"
             app:layout_constraintEnd_toEndOf="@+id/editprofile_img_profile"
             app:srcCompat="@drawable/ic_mypage_profile_btn_edit" />

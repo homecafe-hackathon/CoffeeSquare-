@@ -8,7 +8,6 @@ import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityMainBinding
 import makeus6.hackathon.homecafe.src.main.feed.AddPhotoActivity
 import makeus6.hackathon.homecafe.src.main.home.HomeFragment
-import makeus6.hackathon.homecafe.src.main.mypage.MyPageActivity
 import makeus6.hackathon.homecafe.src.main.mypage.MyPageFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
