@@ -27,7 +27,7 @@ class SetProfileActivity : BaseActivity<ActivitySetProfileBinding>(ActivitySetPr
 
         binding.setprofileBtnRegister.setOnClickListener{
             val postSetProfileRequest = PostSetProfileRequest(intent.getStringExtra("email")!!, intent.getStringExtra("name"),
-                    intent.getStringExtra("profileUrl"))
+            intent.getStringExtra("profileUrl"))
 
             showLoadingDialog(this)
             LoginService(this).trySetProfile(postSetProfileRequest = postSetProfileRequest)
@@ -49,6 +49,7 @@ class SetProfileActivity : BaseActivity<ActivitySetProfileBinding>(ActivitySetPr
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun onSetProfileFailure(message: String) {
