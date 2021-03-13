@@ -16,9 +16,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.ApplicationClass
+import makeus6.hackathon.homecafe.src.main.feed.UpdatePhotoActivity
 import makeus6.hackathon.homecafe.src.main.home.detail.DetailActivity
-import makeus6.hackathon.homecafe.src.main.home.detail.RecyclerService
-import makeus6.hackathon.homecafe.src.main.home.models.*
+import makeus6.hackathon.homecafe.src.main.home.models.HomeDeleteResponse
+import makeus6.hackathon.homecafe.src.main.home.models.HomeUpdateResponse
+import makeus6.hackathon.homecafe.src.main.home.models.data
 import makeus6.hackathon.homecafe.util.LoadingDialog
 
 
@@ -56,6 +58,11 @@ class HomeAdapter(val context: Context, selectArr: MutableList<data>) : Recycler
             if (items[position].creator.email == (ApplicationClass.sf.getString("email", ""))) {
                 val view = LayoutInflater.from(context).inflate(R.layout.my_bottom_sheet_layout, null)
                 view.findViewById<Button>(R.id.btn_update).setOnClickListener {
+                    val intent=Intent(context, UpdatePhotoActivity::class.java)
+                    intent.putExtra("id",items[position].board.id)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent)
                     bottomSheetDialog.dismiss()
                 }
                 view.findViewById<Button>(R.id.btn_delete).setOnClickListener {
