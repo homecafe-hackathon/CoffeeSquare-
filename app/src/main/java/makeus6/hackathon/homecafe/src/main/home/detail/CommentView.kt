@@ -18,4 +18,9 @@ interface CommentView {
     fun onAddLikeSuccess(response: FeedLikeResponse)
 
     fun onAddLikeFailure(message: String)
+
+    fun onDeleteLikeSuccess(response: FeedLikeResponse)
+
+    fun onDeleteLikeFailure(message: String)
+
 }

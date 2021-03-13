@@ -27,11 +27,12 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
     private var profile:String?=null
     private var nick:String?=null
     private var url=ArrayList<String>()
+    private var state:Boolean?=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (intent.hasExtra("boardidx")&&intent.hasExtra("comment")&&intent.hasExtra("content")
-                &&intent.hasExtra("like")&&intent.hasExtra("profile")&&intent.hasExtra("nick")&&intent.hasExtra("url"))
+                &&intent.hasExtra("like")&&intent.hasExtra("profile")&&intent.hasExtra("nick")&&intent.hasExtra("url")&&intent.hasExtra("like_state"))
         {
             boardIdx=intent.getIntExtra("boardidx",0)
             comment=intent.getIntExtra("comment",0)
@@ -40,7 +41,7 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
             profile=intent.getStringExtra("profile")
             nick=intent.getStringExtra("nick")
             url= intent.getStringArrayListExtra("url") as ArrayList<String>
-
+            state=intent.getBooleanExtra("like_state",false)
         }
         binding.feedName.text=nick+"의 카페"
         binding.commentRecycler.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
@@ -51,6 +52,7 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         binding.userImg.scaleType = ImageView.ScaleType.CENTER_CROP
         binding.feedView.adapter=ViewAdapter(this,url)
 
+        binding.contentText.text=content
         if (profile!=null) {
             Glide.with(this).load(profile)
                     .error(Glide.with(binding.userImg).load(R.drawable.no_profile_img))
@@ -61,6 +63,25 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
 
         showLoadingDialog(this)
         CommentService(this).getComment(boardIdx!!)
+
+        if (state==false){
+            binding.loveBtn.setOnClickListener {
+
+                val commentLike=CommentFeedRequest(
+                        boardId=boardIdx!!
+                )
+                binding.loveBtn.setImageResource(R.drawable.like_on)
+                state=true
+                CommentService(this).addLike(commentLike)
+            }
+        }
+        else{
+            binding.loveBtn.setOnClickListener {
+                binding.loveBtn.setImageResource(R.drawable.love)
+                state=false
+                CommentService(this).deleteLike(boardIdx!!)
+            }
+        }
 
         binding.commentUploadBtn.setOnClickListener {
 
@@ -76,13 +97,12 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         }
         binding.commentBtn.setOnClickListener {
            binding.commentEdit.requestFocus()
-//            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
             binding.commentUploadBtn.visibility= View.VISIBLE
             binding.commentEdit.visibility=View.VISIBLE
         }
 
-       
+
+
     }
 
 
@@ -92,7 +112,7 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
 
         binding.commentCount.text="댓글"+response.data.board.commentsCount+"개"
         binding.likeCount.text="좋아요"+response.data.board.likesCount+"개"
-
+        state=response.data.board.like
         binding.commentRecycler.adapter=CommentRecycler(this,response.data)
     }
 
@@ -122,7 +142,16 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
     }
 
     override fun onAddLikeFailure(message: String) {
+        dismissLoadingDialog()
+    }
 
+    override fun onDeleteLikeSuccess(response: FeedLikeResponse) {
+        showLoadingDialog(this)
+        CommentService(this).getComment(boardIdx!!)
+    }
+
+    override fun onDeleteLikeFailure(message: String) {
+        dismissLoadingDialog()
     }
 
 

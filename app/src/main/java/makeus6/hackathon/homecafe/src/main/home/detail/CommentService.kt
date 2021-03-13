@@ -3,6 +3,7 @@ package makeus6.hackathon.homecafe.src.main.home.detail
 import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentEditResponse
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentFeedRequest
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentRequest
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentResponse
 import retrofit2.Call
@@ -37,15 +38,28 @@ class CommentService(val view:DetailActivity) {
         })
     }
 
-    fun addLike(boardId: Int){
+    fun addLike(commentFeedRequest: CommentFeedRequest){
         val addLikeRetrofitInterface = ApplicationClass.sRetrofit.create(CommentRetrofitInterface::class.java)
-        addLikeRetrofitInterface.addLike(boardId).enqueue(object : Callback<FeedLikeResponse> {
+        addLikeRetrofitInterface.addLike(commentFeedRequest).enqueue(object : Callback<FeedLikeResponse> {
             override fun onResponse(call: Call<FeedLikeResponse>, response: Response<FeedLikeResponse>) {
                 view.onAddLikeSuccess(response.body() as FeedLikeResponse)
             }
 
             override fun onFailure(call: Call<FeedLikeResponse>, t: Throwable) {
                 view.onAddLikeFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun deleteLike(boardId: Int){
+        val deleteLikeRetrofitInterface = ApplicationClass.sRetrofit.create(CommentRetrofitInterface::class.java)
+        deleteLikeRetrofitInterface.deleteLike(boardId).enqueue(object : Callback<FeedLikeResponse> {
+            override fun onResponse(call: Call<FeedLikeResponse>, response: Response<FeedLikeResponse>) {
+                view.onDeleteLikeSuccess(response.body() as FeedLikeResponse)
+            }
+
+            override fun onFailure(call: Call<FeedLikeResponse>, t: Throwable) {
+                view.onDeleteLikeFailure(t.message ?: "통신 오류")
             }
         })
     }
