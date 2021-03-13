@@ -11,6 +11,7 @@ import makeus6.hackathon.homecafe.src.main.home.models.HomeResponse
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),HomeFragmentView{
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
