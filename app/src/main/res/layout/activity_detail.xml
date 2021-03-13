@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/feed_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="@string/example"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1.5sp"
+                android:layout_marginTop="16sp"
+                android:background="@color/gray"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/feed_name" />
+
+
+            <ImageView
+                android:id="@+id/user_img"
+                android:layout_width="37sp"
+                android:layout_height="37sp"
+                android:layout_marginTop="10sp"
+                android:src="@drawable/no_profile_img"
+                app:layout_constraintStart_toStartOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <TextView
+                android:id="@+id/user_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@id/user_img"
+                app:layout_constraintLeft_toRightOf="@id/user_img"
+                app:layout_constraintTop_toTopOf="@id/user_img"
+                tools:text="@string/user_nickname" />
+
+            <ImageView
+                android:id="@+id/more_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14sp"
+                android:layout_marginRight="33sp"
+                android:src="@drawable/more_btn"
+                app:layout_constraintBottom_toBottomOf="@id/user_nick"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/user_nick" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/feed_view"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:layout_marginLeft="23sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="23sp"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_img" />
+
+            <ImageView
+                android:id="@+id/love_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/like_btn_background"
+                android:clickable="true"
+                app:layout_constraintStart_toStartOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+            <ImageView
+                android:id="@+id/comment_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7.5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/comment_btn"
+                app:layout_constraintLeft_toRightOf="@id/love_btn"
+                app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+            <TextView
+                android:id="@+id/likeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:layout_marginRight="10sp"
+                android:text="@string/like_count"
+                android:textColor="@color/brown_700"
+                android:textSize="10sp"
+                app:layout_constraintRight_toLeftOf="@id/commentCount"
+                app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+            <TextView
+                android:id="@+id/commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:text="@string/comment"
+                android:textColor="@color/brown_700"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/feed_view" />
+
+
+            <TextView
+                android:id="@+id/content_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23sp"
+                android:layout_marginTop="13.7dp"
+                android:layout_marginRight="23sp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/feed_view"
+                app:layout_constraintStart_toStartOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/comment_btn"
+                tools:text="@string/content_example" />
+
+            <TextView
+                android:id="@+id/comment_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12sp"
+                android:text="@string/comment_view"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/content_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/feed_view"
+                app:layout_constraintStart_toStartOf="@id/feed_view"
+                app:layout_constraintTop_toBottomOf="@id/comment_view" />
+
+            <EditText
+                android:id="@+id/comment_edit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="23sp"
+                android:hint="댓글을 입력해주세요"
+                android:padding="10sp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintWidth_percent="0.7"
+                android:visibility="invisible"
+                android:background="@drawable/edit_background"
+                app:layout_constraintTop_toBottomOf="@id/comment_recycler"
+                app:layout_constraintLeft_toLeftOf="parent">
+                <requestFocus/>
+            </EditText>
+            <Button
+                android:id="@+id/comment_upload_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="확인"
+                android:visibility="invisible"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.18"
+                android:background="@drawable/comment_upload_background"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/comment_recycler"
+                app:layout_constraintStart_toEndOf="@id/comment_edit" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

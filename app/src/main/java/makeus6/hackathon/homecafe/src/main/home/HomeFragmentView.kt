@@ -1,8 +1,15 @@
 package makeus6.hackathon.homecafe.src.main.home
 
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import makeus6.hackathon.homecafe.src.main.home.models.HomeResponse
 
 interface HomeFragmentView {
+
+    fun onGetFeedSuccess(response: HomeResponse)
+
+    fun onGetFeedFailure(message: String)
+
+    fun onSearchFeedSuccess(response: HomeResponse)
+
+    fun onSearchFeedFailure(message: String)
 
 }
