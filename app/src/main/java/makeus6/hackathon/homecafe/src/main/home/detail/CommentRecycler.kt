@@ -14,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.ApplicationClass
-import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentDeleteResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentUpdateResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.commentData
@@ -48,7 +47,6 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
                         bottomSheetDialog.dismiss()
                     }
                     view.findViewById<Button>(R.id.btn_delete).setOnClickListener {
-                        notifyItemRemoved(position)
                         RecyclerService(this).deleteComment(items[position].boardId, items[position].commentId)
                         bottomSheetDialog.dismiss()
                     }
@@ -83,6 +81,7 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
 
     override fun onDeleteCommentSuccess(response: CommentDeleteResponse) {
         Log.d("확인","삭제성공:"+response.data.toString())
+
     }
 
     override fun onDeleteCommentFailure(message: String) {

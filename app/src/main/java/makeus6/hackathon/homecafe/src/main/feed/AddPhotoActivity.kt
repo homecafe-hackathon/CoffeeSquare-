@@ -38,7 +38,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         binding.uploadBtn.setOnClickListener {
             binding.uploadBtn.visibility= View.GONE
             binding.camaraView.visibility=View.GONE
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            binding.uploadBtn.setBackgroundResource(R.drawable.comment_upload_background)
             loadImage()
 
         }
@@ -47,7 +47,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         binding.plusBtn.setOnClickListener {
             binding.uploadBtn.visibility= View.GONE
             binding.camaraView.visibility=View.GONE
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            binding.uploadBtn.setBackgroundResource(R.drawable.comment_upload_background)
             loadImage()
             }
 
