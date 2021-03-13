@@ -8,4 +8,6 @@ interface HomeFragmentView {
 
     fun onGetFeedFailure(message: String)
 
+
+
 }

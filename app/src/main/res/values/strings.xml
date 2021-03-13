@@ -22,4 +22,6 @@
     <string name="example">해피의 카페</string>
     <string name="content_example">안녕하세요 오늘은 집에서 베이킹을 해봤어요! \n 아이들이 너무 좋아하네요!!</string>
     <string name="comment_view">댓글보기</string>
+    <string name="update">수정하기</string>
+    <string name="delete">삭제하기</string>
 </resources>

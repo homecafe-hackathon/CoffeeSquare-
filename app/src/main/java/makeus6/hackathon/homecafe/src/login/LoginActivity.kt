@@ -45,7 +45,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 email = user.kakaoAccount?.email!!
                 name = user.kakaoAccount?.profile?.nickname!!
                 profileUrl = user.kakaoAccount?.profile?.profileImageUrl
-
+                editor.putString("email",user.kakaoAccount?.email)
+                editor.apply()
                 Log.i(
                     "kakaologin", "사용자 정보 요청 성공" +
                             "\n회원번호: ${user.id}" +

@@ -1,10 +1,9 @@
 package makeus6.hackathon.homecafe.src.main.home.detail
 
 import makeus6.hackathon.homecafe.config.ApplicationClass
-import makeus6.hackathon.homecafe.src.main.feed.AddPhotoRetrofitInterface
-import makeus6.hackathon.homecafe.src.main.feed.model.FeedRequest
-import makeus6.hackathon.homecafe.src.main.feed.model.FeedResponse
-import makeus6.hackathon.homecafe.src.main.home.detail.models.*
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentEditResponse
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentRequest
+import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
