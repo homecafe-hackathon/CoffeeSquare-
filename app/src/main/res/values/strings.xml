@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeCafe</string>
+    <string name="app_name">커피스퀘어</string>
     <string name="home_btn_try_get_http_method">테스트</string>
     <string name="home_et_id">ㅎㅇ</string>
     <string name="home_et_pw">pwd</string>
