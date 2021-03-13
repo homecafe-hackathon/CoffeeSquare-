@@ -94,7 +94,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                             // photoUri = data?.data
                             Log.d("확인", "비트맵 변환전" + photoUri)
                             val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
-                            
+
                             binding.photoCount.setText("${count}/6")
                             selectArr.add(dataUri.toString())
                         } else {

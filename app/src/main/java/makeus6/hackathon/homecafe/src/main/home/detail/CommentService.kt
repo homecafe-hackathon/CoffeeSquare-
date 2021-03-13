@@ -1,6 +1,7 @@
 package makeus6.hackathon.homecafe.src.main.home.detail
 
 import makeus6.hackathon.homecafe.config.ApplicationClass
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentEditResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentRequest
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentResponse
@@ -32,6 +33,19 @@ class CommentService(val view:DetailActivity) {
 
             override fun onFailure(call: Call<CommentEditResponse>, t: Throwable) {
                 view.onPostCommentFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
+
+    fun addLike(boardId: Int){
+        val addLikeRetrofitInterface = ApplicationClass.sRetrofit.create(CommentRetrofitInterface::class.java)
+        addLikeRetrofitInterface.addLike(boardId).enqueue(object : Callback<FeedLikeResponse> {
+            override fun onResponse(call: Call<FeedLikeResponse>, response: Response<FeedLikeResponse>) {
+                view.onAddLikeSuccess(response.body() as FeedLikeResponse)
+            }
+
+            override fun onFailure(call: Call<FeedLikeResponse>, t: Throwable) {
+                view.onAddLikeFailure(t.message ?: "통신 오류")
             }
         })
     }
