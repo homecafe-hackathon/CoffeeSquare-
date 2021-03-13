@@ -19,15 +19,9 @@
         android:background="@color/white"
         app:itemBackground="@color/white"
         app:labelVisibilityMode="unlabeled"
+        android:backgroundTint="@color/brown_700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_bottom_nav" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/feed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,9 @@ import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityLoginBinding
 import makeus6.hackathon.homecafe.src.login.models.LoginResponse
+
 import makeus6.hackathon.homecafe.src.login.models.SetProfileResponse
+
 import makeus6.hackathon.homecafe.src.main.MainActivity
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginView {
@@ -21,7 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+    
         // 로그인 공통 callback 구성
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
@@ -41,7 +43,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 email = user.kakaoAccount?.email!!
                 name = user.kakaoAccount?.profile?.nickname!!
                 profileUrl = user.kakaoAccount?.profile?.profileImageUrl
-
+                editor.putString("email",user.kakaoAccount?.email)
+                editor.apply()
                 Log.i(
                     "kakaologin", "사용자 정보 요청 성공" +
                             "\n회원번호: ${user.id}" +
@@ -51,7 +54,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 )
             }
         }
-
+    
         binding.loginBtnKakao.setOnClickListener {
             // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
             if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -61,7 +64,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             }
         }
     }
-
+    
     override fun onLoginSuccess(response: LoginResponse) {
         dismissLoadingDialog()
 //       회원가입일때 프로필 등록 화면으로 넘어가도록 -> 프로필 등록시 토큰 헤더에 등록
@@ -71,7 +74,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             intent.putExtra("email", email)
             intent.putExtra("name", name)
             intent.putExtra("profileUrl", profileUrl)
-
+    
             startActivity(intent)
         } else {
 //          토큰 등록
@@ -82,17 +85,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             startActivity(intent)
             finish()
         }
-    }
 
+    }
+    
     override fun onLoginFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast("오류 : $message")
     }
-
+    
     override fun onSetProfileSuccess(response: SetProfileResponse) {
         TODO("Not yet implemented")
     }
-
+    
     override fun onSetProfileFailure(message: String) {
         TODO("Not yet implemented")
     }

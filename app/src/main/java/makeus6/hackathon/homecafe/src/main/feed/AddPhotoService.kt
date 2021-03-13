@@ -3,6 +3,7 @@ package makeus6.hackathon.homecafe.src.main.feed
 import makeus6.hackathon.homecafe.config.ApplicationClass
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedRequest
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedResponse
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedUpdateRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,4 +22,6 @@ class AddPhotoService(val view:AddPhotoActivity) {
             }
         })
     }
+
+
 }

@@ -18,7 +18,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity android:name=".src.main.mypage.MyPageEditProfileActivity"></activity>
+
         <activity android:name=".src.splash.SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +37,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".src.main.MainActivity" />
-        <activity android:name=".src.main.feed.AddPhotoActivity" />
+        <activity android:name=".src.main.home.detail.DetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".src.main.feed.AddPhotoActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
+        <activity android:name=".src.main.feed.UpdatePhotoActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
     </application>
 
 </manifest>

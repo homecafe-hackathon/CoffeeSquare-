@@ -3,15 +3,12 @@ package makeus6.hackathon.homecafe.src.main.feed
 import android.content.ClipData
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.storage.FirebaseStorage
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.BaseActivity
@@ -19,7 +16,6 @@ import makeus6.hackathon.homecafe.databinding.ActivityAddphotoBinding
 import makeus6.hackathon.homecafe.src.main.MainActivity
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedRequest
 import makeus6.hackathon.homecafe.src.main.feed.model.FeedResponse
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,19 +29,27 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
     private val REQUEST_READ_EXTERMAL_STORAGE = 1000
     val uriArr = ArrayList<String>()
     val selectArr = ArrayList<String>()
-
+    private var count:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         storage = FirebaseStorage.getInstance()
 
 
-        binding.uploadBtn.setOnClickListener {  loadImage()
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)}
+        binding.uploadBtn.setOnClickListener {
+            binding.uploadBtn.visibility= View.GONE
+            binding.camaraView.visibility=View.GONE
+            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            loadImage()
+
+        }
 
         binding.selectList.layoutManager=GridLayoutManager(this,3)
-        binding.plusBtn.setOnClickListener { loadImage()
-
-            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes) }
+        binding.plusBtn.setOnClickListener {
+            binding.uploadBtn.visibility= View.GONE
+            binding.camaraView.visibility=View.GONE
+            binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+            loadImage()
+            }
 
 
         binding.feedBtn.setOnClickListener {
@@ -79,7 +83,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                 photoUri = data?.data
                 try {
                     val clipData:ClipData=data?.clipData!!
-                    val count=clipData.itemCount
+                     count=clipData.itemCount
 
                     if (clipData.itemCount>6){
                         showCustomToast("사진은 6장까지 선택가능합니다.")
@@ -91,6 +95,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                             Log.d("확인", "비트맵 변환전" + photoUri)
                             val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, dataUri)
 
+                            binding.photoCount.setText("${count}/6")
                             selectArr.add(dataUri.toString())
                         } else {
                             Log.d("확인", "사진 여러장")
@@ -103,7 +108,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
 
                                 selectArr.add(dataUri.toString())
                                 binding.photoCount.setText("${count}/6")
-                                binding.uploadBtn.setBackgroundResource(R.drawable.upload_btn_yes)
+
                             }
                         }
                     }
@@ -115,20 +120,43 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                 Log.d("확인", "이미지 안됨")
             }
         }
-        contentUpload()
+        contentUpload(count)
     }
 
-    fun contentUpload() {
+    fun contentUpload(count:Int) {
         uriArr.clear()
         showLoadingDialog(this)
-        for (i in selectArr.indices) {
-            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-            var fileN = selectArr[i].split("/").last()
-            val split = fileN.split(".")
-            fileN = split.first() + timestamp.split('.').first() + "." + split.last()
-            val storageRef = storage?.reference?.child("media")?.child(fileN)
 
-            storageRef?.putFile(Uri.parse(selectArr[i])!!)?.addOnSuccessListener {
+        if(count>1) {
+            for (i in selectArr.indices) {
+                val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                var fileN = selectArr[i].split("/").last()
+                val split = fileN.split(".")
+                fileN = split.first() + timestamp.split('.').first() + "." + split.last()
+                val storageRef = storage?.reference?.child("media")?.child(fileN)
+
+                storageRef?.putFile(Uri.parse(selectArr[i])!!)?.addOnSuccessListener {
+                    Log.d("photo", "파이어베이스 업로드완료")
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        uriArr.add(uri.toString())
+                        Log.d("확인", uri.toString())
+                        Log.d("확인", uri.toString())
+                        val check: String = uri.toString()
+                        val check_uri: Uri = Uri.parse(check)
+                        Log.d("확인", "문자열된값:" + check)
+                        Log.d("확인", "Uri로 다시 변환된값:" + check_uri)
+
+                        binding.selectList.adapter = selectRecycler(this, uriArr)
+                    }
+                }
+
+            }
+        }else{
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            val imageFile = "Image_"+timestamp+"_.jpg"
+            val storageRef = storage?.reference?.child("media")?.child(imageFile)
+
+            storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
                 Log.d("photo", "파이어베이스 업로드완료")
                 storageRef.downloadUrl.addOnSuccessListener { uri ->
                     uriArr.add(uri.toString())
@@ -138,8 +166,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
                     val check_uri: Uri = Uri.parse(check)
                     Log.d("확인", "문자열된값:" + check)
                     Log.d("확인", "Uri로 다시 변환된값:" + check_uri)
-                    binding.uploadBtn.visibility= View.GONE
-                    binding.camaraView.visibility=View.GONE
+
                     binding.selectList.adapter = selectRecycler(this, uriArr)
                 }
             }
@@ -150,7 +177,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
 
     override fun onAddPhotoSuccess(response: FeedResponse) {
         dismissLoadingDialog()
-        Log.d("확인",response.message)
+//        Log.d("확인",response.message)
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
@@ -159,5 +186,7 @@ class AddPhotoActivity : BaseActivity<ActivityAddphotoBinding>(ActivityAddphotoB
         dismissLoadingDialog()
         Log.d("확인",message)
     }
+
+
 
 }

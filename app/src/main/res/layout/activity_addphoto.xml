@@ -59,6 +59,7 @@
         android:background="@drawable/camera_background"
         android:hint="@string/content_hint"
         android:padding="15sp"
+        android:maxLength="15"
         android:textSize="13sp"
         android:textColor="@color/black"
         app:layout_constraintHeight_percent="0.39"
