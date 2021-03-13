@@ -17,6 +17,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        val editor = ApplicationClass.sf.edit()
+//        //  토큰 삭제
+//        editor.remove("Authorization")
+//        editor.apply()
+
 //       로그인을 한 상태(토큰이 있는상태)
         if (ApplicationClass.sf.getString("Authorization", null)!=null){
             Handler(Looper.getMainLooper()).postDelayed({
