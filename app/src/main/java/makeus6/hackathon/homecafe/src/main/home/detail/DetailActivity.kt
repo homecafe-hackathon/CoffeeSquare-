@@ -1,7 +1,10 @@
 package makeus6.hackathon.homecafe.src.main.home.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -59,15 +62,24 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         CommentService(this).getComment(boardIdx!!)
 
         binding.commentUploadBtn.setOnClickListener {
+
+            binding.commentEdit.visibility=View.GONE
+            binding.commentUploadBtn.visibility=View.GONE
             val commentRequest=CommentRequest(
                     boardId=boardIdx!!,
                     content=binding.commentEdit.text.toString()
             )
-
+            binding.commentEdit.setText("")
             CommentService(this).postComment(commentRequest)
             showLoadingDialog(this)
         }
-
+        binding.commentBtn.setOnClickListener {
+           binding.commentEdit.requestFocus()
+//            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+            binding.commentUploadBtn.visibility= View.VISIBLE
+            binding.commentEdit.visibility=View.VISIBLE
+        }
     }
 
 
@@ -89,7 +101,7 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
     override fun onPostCommentSuccess(response: CommentEditResponse) {
         dismissLoadingDialog()
         Log.d("확인","성공:"+response.data.toString())
-
+        Log.d("확인","댓글이 생성됩니다")
         showLoadingDialog(this)
         CommentService(this).getComment(boardIdx!!)
 

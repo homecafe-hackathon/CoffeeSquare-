@@ -21,6 +21,18 @@ class HomeService(val view: HomeFragmentView) {
             }
         })
     }
+    fun searchFeed(keyword:String,lastBoardId: Int, size: Int) {
+        val HomeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        HomeRetrofitInterface.searchFeed(keyword,lastBoardId, size).enqueue(object : Callback<HomeResponse> {
+            override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
+                view.onGetFeedSuccess(response.body() as HomeResponse)
+            }
+
+            override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
+                view.onGetFeedFailure(t.message ?: "통신 오류")
+            }
+        })
+    }
 }
 
 

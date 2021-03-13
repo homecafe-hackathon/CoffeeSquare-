@@ -158,21 +158,31 @@
 
             <EditText
                 android:id="@+id/comment_edit"
-                android:layout_width="300sp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="23sp"
                 android:hint="댓글을 입력해주세요"
                 android:padding="10sp"
                 android:textColor="@color/black"
                 android:textSize="13sp"
-               app:layout_constraintTop_toBottomOf="@id/comment_recycler"
-                app:layout_constraintLeft_toLeftOf="parent" />
-
+                app:layout_constraintWidth_percent="0.7"
+                android:visibility="invisible"
+                android:background="@drawable/edit_background"
+                app:layout_constraintTop_toBottomOf="@id/comment_recycler"
+                app:layout_constraintLeft_toLeftOf="parent">
+                <requestFocus/>
+            </EditText>
             <Button
                 android:id="@+id/comment_upload_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="전송"
-               app:layout_constraintTop_toBottomOf="@id/comment_recycler"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="확인"
+                android:visibility="invisible"
+                android:textSize="14sp"
+                app:layout_constraintWidth_percent="0.18"
+                android:background="@drawable/comment_upload_background"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/comment_recycler"
                 app:layout_constraintStart_toEndOf="@id/comment_edit" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
