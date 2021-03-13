@@ -21,7 +21,8 @@ interface CommentRetrofitInterface {
     fun updateComment(@Query("boardId") boardId:Int,@Query("commentId") commentId:Int) : Call<CommentUpdateResponse>
 
     @POST("/api/v1/board/like")
-    fun addLike(@Query("boardId") boardId:Int):Call<FeedLikeResponse>
+    fun addLike(@Body params: CommentFeedRequest):Call<FeedLikeResponse>
 
-
+    @DELETE("/api/v1/board/like")
+    fun deleteLike(@Query("boardId") boardId: Int):Call<FeedLikeResponse>
 }
