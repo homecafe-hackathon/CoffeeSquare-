@@ -1,6 +1,7 @@
 package makeus6.hackathon.homecafe.src.main.home.detail
 
 
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -18,4 +19,9 @@ interface CommentRetrofitInterface {
 
     @PUT("/api/v1/board/comment")
     fun updateComment(@Query("boardId") boardId:Int,@Query("commentId") commentId:Int) : Call<CommentUpdateResponse>
+
+    @POST("/api/v1/board/like")
+    fun addLike(@Query("boardId") boardId:Int):Call<FeedLikeResponse>
+
+
 }

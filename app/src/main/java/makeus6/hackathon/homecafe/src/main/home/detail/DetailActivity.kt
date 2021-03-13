@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.BaseActivity
 import makeus6.hackathon.homecafe.databinding.ActivityDetailBinding
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.HomeAdapter
 import makeus6.hackathon.homecafe.src.main.home.HomeService
 import makeus6.hackathon.homecafe.src.main.home.ViewAdapter
@@ -80,6 +81,8 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
             binding.commentUploadBtn.visibility= View.VISIBLE
             binding.commentEdit.visibility=View.VISIBLE
         }
+
+       
     }
 
 
@@ -113,6 +116,14 @@ class DetailActivity:BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::
         Log.d("확인","실패"+message)
     }
 
+    override fun onAddLikeSuccess(response: FeedLikeResponse) {
+        showLoadingDialog(this)
+        CommentService(this).getComment(boardIdx!!)
+    }
+
+    override fun onAddLikeFailure(message: String) {
+
+    }
 
 
 }

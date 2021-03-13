@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.ApplicationClass
+import makeus6.hackathon.homecafe.src.main.feed.model.FeedLikeResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentDeleteResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.CommentUpdateResponse
 import makeus6.hackathon.homecafe.src.main.home.detail.models.commentData
@@ -95,4 +96,5 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
     override fun onUpdateCommentFailure(message: String) {
         Log.d("확인","실패:"+message)
     }
+
 }
