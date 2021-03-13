@@ -85,12 +85,12 @@ class MyPageEditProfileActivity : BaseActivity<ActivityMyPageEditProfileBinding>
 
         if(requestCode==Gallery){
             if(resultCode== RESULT_OK){
-                var dataUri=data?.data
+                val dataUri=data?.data
                 photoUri=data?.data
                 try{
                     Log.d("확인","비트맵 변환전"+photoUri)
                     val bitmap: Bitmap =MediaStore.Images.Media.getBitmap(this.contentResolver,dataUri)
-                    Log.d("확인","선택한 사진은"+bitmap)
+                    Log.d("확인", "선택한 사진은$bitmap")
                     Log.d("확인", dataUri.toString())
 
                 }catch (e:Exception){

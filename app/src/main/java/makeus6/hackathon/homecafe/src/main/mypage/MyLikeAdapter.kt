@@ -34,8 +34,8 @@ class MyLikeAdapter(val context: Context, uriArr: List<DataGetMyLike>) : BaseAda
         val display = context.resources.displayMetrics
         imageView.padding = 2
         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-        imageView.layoutParams = LinearLayout.LayoutParams(display.widthPixels / 3,
-            display.widthPixels / 3)
+        imageView.layoutParams = LinearLayout.LayoutParams(display.widthPixels / 4,
+            display.widthPixels / 4)
         Glide.with(context).load(items[p].pictureUrls[0]).into(imageView)
         return imageView
     }

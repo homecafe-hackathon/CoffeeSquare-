@@ -10,16 +10,17 @@ import com.bumptech.glide.RequestManager
 import makeus6.hackathon.homecafe.R
 import makeus6.hackathon.homecafe.config.BaseFragment
 import makeus6.hackathon.homecafe.databinding.FragmentMyPageBinding
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyFeedResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyLikeResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyPageEditResponse
-import makeus6.hackathon.homecafe.src.main.mypage.models.MyPageResponse
-
+import makeus6.hackathon.homecafe.src.main.mypage.models.*
 
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding::bind, R.layout.fragment_my_page),
     MyPageView {
-    private lateinit var mGlideRequestManager:RequestManager
+    private lateinit var mGlideRequestManager:RequestManager //글라이드 매니저
+    var like_list = listOf<DataGetMyLike>() //좋아요는 나중에 불러오니깐
     lateinit var name:String
+
+    private var likeAdapter:MyLikeAdapter?=null
+    private var feedAdapter:MyFeedAdapter?=null
+
     private var profileUrl = ""
     private val REQUEST_EDIT_PROFILE = 1000
 
@@ -37,6 +38,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
         showLoadingDialog(requireContext())
         MyPageService(this).tryGetProfile() //프로필조회
         MyPageService(this).tryGetMyFeed() //피드 조회
+        MyPageService(this).tryGetMyLike()
 
 //        로그아웃
         binding.mypageBtnSetting.setOnClickListener {
@@ -62,6 +64,9 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
 
             showLoadingDialog(requireContext())
             MyPageService(this).tryGetMyFeed()
+
+            binding.mypageGridview.numColumns = 3 // 한 줄에 3개씩
+            binding.mypageGridview.adapter = feedAdapter
         }
 
 //       내 좋아요 보기
@@ -71,6 +76,11 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
 
             showLoadingDialog(requireContext())
             MyPageService(this).tryGetMyLike()
+
+            likeAdapter = MyLikeAdapter(requireContext(), like_list)
+
+            binding.mypageGridview.numColumns = 3 // 한 줄에 3개씩
+            binding.mypageGridview.adapter = likeAdapter
         }
     }
 
@@ -98,6 +108,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
                     .into(binding.mypageImgProfile)
         }
         binding.mypageTvName.text = response.data.name
+        name = response.data.name
     }
 
     override fun onGetProfileFailure(message: String) {
@@ -108,11 +119,12 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
     override fun onGetMyFeedSuccess(response: MyFeedResponse) {
         dismissLoadingDialog()
 
-        var picturelist = response.data
-        val adapter = MyFeedAdapter(requireContext(), picturelist)
+        val myfeedlist = response.data
+        binding.mypageTvHomecount.text = myfeedlist.size.toString()
+        feedAdapter = MyFeedAdapter(requireContext(), myfeedlist)
 
-        binding.mypageGridview.numColumns = 3 // 한 줄에 3개씩
-        binding.mypageGridview.adapter = adapter
+        binding.mypageGridview.numColumns = 3
+        binding.mypageGridview.adapter = feedAdapter
     }
 
     override fun onGetMyFeedFailure(message: String) {
@@ -123,11 +135,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
     override fun onGetMyLikeSuccess(response: MyLikeResponse) {
         dismissLoadingDialog()
 
-        var picturelist = response.data
-        val adapter = MyLikeAdapter(requireContext(), picturelist)
-
-        binding.mypageGridview.numColumns = 3 // 한 줄에 3개씩
-        binding.mypageGridview.adapter = adapter    }
+        val likelist = response.data
+        binding.mypageTvHeartcount.text = likelist.size.toString()
+        like_list = likelist
+    }
 
     override fun onGetMyLikeFailure(message: String) {
         dismissLoadingDialog()
