@@ -8,4 +8,6 @@ interface AddPhotoView {
     fun onAddPhotoSuccess(response: FeedResponse)
 
     fun onAddPhotoFailure(message: String)
+
+
 }
