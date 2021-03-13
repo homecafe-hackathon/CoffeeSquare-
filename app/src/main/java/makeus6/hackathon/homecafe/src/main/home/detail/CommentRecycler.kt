@@ -81,7 +81,7 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
     }
 
     override fun onDeleteCommentSuccess(response: CommentDeleteResponse) {
-        Log.d("확인","성공:"+response.data.toString())
+        Log.d("확인","삭제성공:"+response.data.toString())
     }
 
     override fun onDeleteCommentFailure(message: String) {
@@ -89,7 +89,7 @@ class CommentRecycler (val context: Context, selectArr:commentData) : RecyclerVi
     }
 
     override fun onUpdateCommentSuccess(response: CommentUpdateResponse) {
-        Log.d("확인","성공:"+response.data.toString())
+        Log.d("확인","업데이트성공:"+response.data.toString())
     }
 
     override fun onUpdateCommentFailure(message: String) {

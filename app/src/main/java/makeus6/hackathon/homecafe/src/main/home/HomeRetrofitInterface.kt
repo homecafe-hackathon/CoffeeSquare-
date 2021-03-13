@@ -17,4 +17,7 @@ interface HomeRetrofitInterface {
 
     @PUT("/api/v1/board")
     fun updateFeed(@Body params: HomeUpdateRequest):Call<HomeUpdateResponse>
+
+    @GET("/api/v1/board/list/search")
+    fun searchFeed(@Query("keyword")ketword:String,@Query("lastBoardId")lastBoardId: Int,@Query("size")size: Int):Call<HomeResponse>
 }

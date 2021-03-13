@@ -40,8 +40,10 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".src.main.MainActivity" />
-        <activity android:name=".src.main.home.detail.DetailActivity"/>
-        <activity android:name=".src.main.feed.AddPhotoActivity" />
+        <activity android:name=".src.main.home.detail.DetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".src.main.feed.AddPhotoActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
     </application>
 
 </manifest>
