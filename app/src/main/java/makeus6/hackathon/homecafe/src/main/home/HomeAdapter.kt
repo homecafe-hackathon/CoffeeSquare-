@@ -108,6 +108,7 @@ class HomeAdapter(val context: Context, selectArr: MutableList<data>) : Recycler
             intent.putExtra("like", items[position].board.likesCount)
             intent.putExtra("comment", items[position].board.commentsCount)
             intent.putExtra("url", items[position].board.url)
+            intent.putExtra("like_state",items[position].board.like)
             context.startActivity(intent)
         }
 

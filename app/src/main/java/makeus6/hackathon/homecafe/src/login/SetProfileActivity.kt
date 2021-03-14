@@ -29,7 +29,9 @@ class SetProfileActivity : BaseActivity<ActivitySetProfileBinding>(ActivitySetPr
         binding.setprofileBtnRegister.setOnClickListener{
             Log.d("안녕", binding.setprofileEdtName.text.toString())
             val postSetProfileRequest = PostSetProfileRequest(intent.getStringExtra("email")!!, binding.setprofileEdtName.text.toString(),
-            intent.getStringExtra("profileUrl"))
+
+                    intent.getStringExtra("profileUrl"))
+
 
             showLoadingDialog(this)
             LoginService(this).trySetProfile(postSetProfileRequest = postSetProfileRequest)

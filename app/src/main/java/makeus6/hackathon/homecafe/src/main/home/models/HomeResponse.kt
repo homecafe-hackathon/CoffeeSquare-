@@ -22,6 +22,8 @@ data class boardData(
         val likesCount:Int,
         val commentsCount:Int,
         @SerializedName("pictureUrls") val url:ArrayList<String>
+,val like:Boolean
+
 )
 
 data class creator(
