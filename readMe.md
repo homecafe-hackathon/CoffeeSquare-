@@ -18,8 +18,9 @@ Designer: Happy
 
 ## 기술 스택
 
-- Android Studio
-- Kotiln(MVP패턴 적용),REST API사용, Retrofit+Okhttp
+- Kotiln 
+- Retrofit+Okhttp
+- Firebase, Glide, CircleImageView
 - Spring boot
 - Spring Web MVC
 - Spring Data JPA
